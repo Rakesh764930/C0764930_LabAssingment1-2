@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+
+
+            <Button
+                android:id="@+id/btn_restaurant"
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="0.5dp"
+                android:layout_weight="1"
+                android:background="@drawable/food1"
+                android:onClick="btnClick"
+                android:textColor="#fff" />
+
+
+            <Button
+                android:id="@+id/btn_museum"
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="0.5dp"
+                android:layout_weight="1"
+                android:background="@drawable/museum"
+                android:onClick="btnClick"
+
+                android:textColor="#fff" />
+
+            <Button
+                android:id="@+id/btn_cafe"
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="0.5dp"
+                android:layout_weight="1"
+                android:background="@drawable/cafe"
+                android:onClick="btnClick"
+                android:textColor="#fff" />
+
+            <Button
+                android:id="@+id/btn_add_fav"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/ic_action_name"
+                android:onClick="btnClick"
+                android:textColor="#fff"
+                android:layout_marginLeft="0.5dp"
+                />
+
+
+
+
+        </LinearLayout>
+
+
+
+
+
+
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_clear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="0.5dp"
+            android:layout_weight="1"
+            android:background="#FCBD03"
+            android:text="clear Map"
+            android:onClick="btnClick"
+            android:textColor="#fff" />
+
+        <Spinner
+            android:id="@+id/maptype"
+            android:layout_width="167dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#FCBD03"
+            android:entries="@array/mapViews"
+            android:textColor="#fff"/>
+
+        <Button
+            android:id="@+id/btn_direction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginLeft="0.5dp"
+            android:background="@drawable/compass"
+            android:onClick="btnClick"
+            android:textColor="#fff" />
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>
