@@ -31,6 +31,16 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
 
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="GO"
+            android:id="@+id/btn_go">
+        </Button>
+    </LinearLayout>
 
 
 </LinearLayout>

@@ -281,14 +281,20 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 Toast.makeText(this, "Cafe'", Toast.LENGTH_SHORT).show();
                 fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper());
                 break;
+
             case R.id.btn_add_fav:
                 Intent intent = new Intent(MainActivity.this,FavouritePlacesActivity.class);
                 startActivity(intent);
-
                 break;
+
             case R.id.btn_clear:
                 mMap.clear();
                 fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper());
+
+            case R.id.btn_list:
+                Intent mintent = new Intent(MainActivity.this,PlacesList.class);
+                startActivity(mintent);
+
 
             default:
                     break;
