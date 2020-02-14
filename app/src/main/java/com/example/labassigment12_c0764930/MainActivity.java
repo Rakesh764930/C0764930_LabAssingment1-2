@@ -186,7 +186,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
     private void setMarker(LatLng latLng){
-        MarkerOptions options = new MarkerOptions().position(latLng).title(address)
+        MarkerOptions options = new MarkerOptions().position(latLng).title("Address"+address)
                 .snippet("Your Destination").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
         mMap.addMarker(options);
 
@@ -242,7 +242,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 Log.d("", "btnClick: " + url);
 
                 getNearbyPlaceData.execute(objects);
-                Toast.makeText(this, "Restaurants", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"Restaurants", Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.btn_museum:
@@ -311,7 +311,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         StringBuilder urlBuilder = new StringBuilder("https://maps.googleapis.com/maps/api/directions/json?");
         urlBuilder.append("origin="+currentLocation.latitude+","+currentLocation.longitude);
         urlBuilder.append("&destination="+customMarker.latitude+","+customMarker.longitude);
-        urlBuilder.append("&key=AIzaSyBdKN4R296edvW6EnskkoeGUfW0uyNNea8");
+        urlBuilder.append("&key="+getString(R.string.places_key));
         Log.d("", "getDirectionUrl: "+urlBuilder);
         return urlBuilder.toString();
     }
@@ -322,7 +322,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         placeUrl.append("location="+latitude+","+longitude);
         placeUrl.append("&radius="+RADIUS);
         placeUrl.append("&type="+nearbyPlace);
-        placeUrl.append("&key=AIzaSyBdKN4R296edvW6EnskkoeGUfW0uyNNea8");
+        placeUrl.append("&key="+getString(R.string.places_key));
         System.out.println(placeUrl.toString());
         return placeUrl.toString();
     }

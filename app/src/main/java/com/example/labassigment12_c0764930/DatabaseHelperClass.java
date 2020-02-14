@@ -69,16 +69,17 @@ public class  DatabaseHelperClass extends SQLiteOpenHelper {
         return sqLiteDatabase.rawQuery("SELECT * FROM "+TABLE_NAME,null);
 
     }
-    boolean updatePlaces(int id,String address, String nameoffavrtplace, double latitude, double longitude){
+    boolean updatePlace(int id, String address, double lat, double lng) {
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
 
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(COLUMN_NAME,nameoffavrtplace);
-        contentValues.put(COLUMN_ADDRESS,address);
-        contentValues.put(COLUMN_LAT,latitude);
-        contentValues.put(COLUMN_LONG,longitude);
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_ADDRESS, address);
+        cv.put(COLUMN_LAT, lat);
+        cv.put(COLUMN_LONG, lng);
+       // cv.put(COLUMN_VISITED, visited);
 
-        return  sqLiteDatabase.update(TABLE_NAME,contentValues,COLUMN_ID+" = ? ",new String[]{String.valueOf(id)}) >0 ;
+        //returns the number of rows affected
+        return sqLiteDatabase.update(TABLE_NAME, cv, COLUMN_ID + "=?", new String[]{String.valueOf(id)}) > 0;
     }
 
     boolean deletePlaces(int id){

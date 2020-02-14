@@ -1,12 +1,13 @@
 <resources>
     <string name="app_name">LabAssigment1&amp;2_c0764930</string>
     <string name="key">AIzaSyBkURaDSrHi935bisjJ8rC9M_LJHT0p9KE</string>
+    <string name="places_key">AIzaSyBdKN4R296edvW6EnskkoeGUfW0uyNNea8</string>
 
     <string-array name="mapViews">
 
-    <item>Hybrid</item>
-    <item>Satellite</item>
-    <item>Terrain</item>
-        <item>Normal</item>
+        <item>HYBRID</item>
+        <item>SATELLITE</item>
+        <item>TERRAIN</item>
+        <item>NORMAL</item>
     </string-array>
 </resources>

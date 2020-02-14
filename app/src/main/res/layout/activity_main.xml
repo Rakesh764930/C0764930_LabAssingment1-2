@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="0.5dp"
             android:layout_weight="1"
-            android:text="Museumm"
+            android:text="Museum"
             android:background="#1015DF"
             android:onClick="btnClick"
 

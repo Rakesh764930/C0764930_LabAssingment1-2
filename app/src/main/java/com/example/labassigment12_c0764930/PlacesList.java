@@ -7,11 +7,8 @@ import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.Toast;
-
 import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
@@ -26,8 +23,6 @@ public class PlacesList extends AppCompatActivity {
 
     DatabaseHelperClass mDatabase;
     List<PlacesModel> listPlace;
-   // ListView listView;
-    Button button;
     SwipeMenuListView listView;
 
     @Override
@@ -41,41 +36,43 @@ public class PlacesList extends AppCompatActivity {
 
         final AdaptorPlaces placesAdaptor = new AdaptorPlaces(this,R.layout.layout_list_places,listPlace,mDatabase);
         listView.setAdapter(placesAdaptor);
+
+        //https://github.com/baoyongzhang/SwipeMenuListView
         SwipeMenuCreator creator = new SwipeMenuCreator() {
 
             @Override
             public void create(SwipeMenu menu) {
 
 
-                SwipeMenuItem deleteItem = new SwipeMenuItem(
+                SwipeMenuItem item = new SwipeMenuItem(
                         getApplicationContext());
-                deleteItem.setTitle("Delete");
+                item.setTitle("Delete");
 
-                deleteItem.setBackground(new ColorDrawable(Color.rgb(0xF9,
+                item.setBackground(new ColorDrawable(Color.rgb(0xF9,
                         0x3F, 0x25)));
 
-                deleteItem.setWidth(300);
-                deleteItem.setTitleSize(18);
-                deleteItem.setTitleColor(Color.BLACK);
+                item.setWidth(280);
+                item.setTitleSize(20);
+                item.setTitleColor(Color.WHITE);
 
-                menu.addMenuItem(deleteItem);
+                menu.addMenuItem(item);
 
-                SwipeMenuItem openItem = new SwipeMenuItem(
+                SwipeMenuItem item1 = new SwipeMenuItem(
                         getApplicationContext());
 
-                openItem.setBackground(new ColorDrawable(Color.rgb(0xF9, 0x66,
+                item1.setBackground(new ColorDrawable(Color.rgb(0xF9, 0x66,
                         0xff)));
 
-                openItem.setWidth(300);
+                item1.setWidth(280);
 
-                openItem.setTitle("Update");
+                item1.setTitle("Update");
 
-                openItem.setTitleSize(18);
+                item1.setTitleSize(20);
 
 
-                openItem.setTitleColor(Color.WHITE);
+                item1.setTitleColor(Color.WHITE);
 
-                menu.addMenuItem(openItem);
+                menu.addMenuItem(item1);
 
 
             }
@@ -89,20 +86,10 @@ public class PlacesList extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
                 switch (index) {
+
                     case 0:
-                        Intent intent = new Intent(PlacesList.this,MainActivity.class);
-                        intent.putExtra("id",listPlace.get(position).id);
-                        intent.putExtra("lat",listPlace.get(position).latitude);
-                        intent.putExtra("lng",listPlace.get(position).longitude);
-                        intent.putExtra("edit",true);
-                        startActivity(intent);
 
-                        break;
-                    case 1:
-
-                        //Toast.makeText(List0fFavtPlaces.this, "SEE:"+listPlace.get(position).id, Toast.LENGTH_SHORT).show();
-
-                        if(mDatabase.deletePlaces(listPlace.get(position).id)){
+                        if (mDatabase.deletePlaces(listPlace.get(position).id)) {
 
                             listPlace.remove(position);
                             loadPlaces();
@@ -112,7 +99,7 @@ public class PlacesList extends AppCompatActivity {
                             loadPlaces();
 
 
-                        }else {
+                        } else {
 
                             Toast.makeText(PlacesList.this, "not deleted", Toast.LENGTH_SHORT).show();
 
@@ -122,8 +109,16 @@ public class PlacesList extends AppCompatActivity {
 
 
                         break;
-                }
 
+                    case 1:
+                        Intent intent = new Intent(PlacesList.this, MainActivity.class);
+                        intent.putExtra("id", listPlace.get(position).id);
+                        intent.putExtra("lat", listPlace.get(position).latitude);
+                        intent.putExtra("lng", listPlace.get(position).longitude);
+                        intent.putExtra("edit", true);
+                        startActivity(intent);
+                        break;
+                }
                 return false;
             }
         });
