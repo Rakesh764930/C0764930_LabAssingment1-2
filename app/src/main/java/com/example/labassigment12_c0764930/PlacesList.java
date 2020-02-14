@@ -2,33 +2,135 @@ package com.example.labassigment12_c0764930;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import com.baoyz.swipemenulistview.SwipeMenu;
+import com.baoyz.swipemenulistview.SwipeMenuCreator;
+import com.baoyz.swipemenulistview.SwipeMenuItem;
+import com.baoyz.swipemenulistview.SwipeMenuListView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+
 
 public class PlacesList extends AppCompatActivity {
 
     DatabaseHelperClass mDatabase;
     List<PlacesModel> listPlace;
-    ListView listView;
+   // ListView listView;
+    Button button;
+    SwipeMenuListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_list_saved_places);
-        listView = findViewById(R.id.saved_places_list);
+        listView = (SwipeMenuListView )findViewById(R.id.saved_places_list);
         listPlace = new ArrayList<>();
         mDatabase = new DatabaseHelperClass(this);
         loadPlaces();
 
+        final AdaptorPlaces placesAdaptor = new AdaptorPlaces(this,R.layout.layout_list_places,listPlace,mDatabase);
+        listView.setAdapter(placesAdaptor);
+        SwipeMenuCreator creator = new SwipeMenuCreator() {
 
-        AdaptorPlaces adaptorPlaces = new AdaptorPlaces(this,R.layout.layout_list_places,listPlace,mDatabase);
-        listView.setAdapter(adaptorPlaces);
+            @Override
+            public void create(SwipeMenu menu) {
+
+
+                SwipeMenuItem deleteItem = new SwipeMenuItem(
+                        getApplicationContext());
+                deleteItem.setTitle("Delete");
+
+                deleteItem.setBackground(new ColorDrawable(Color.rgb(0xF9,
+                        0x3F, 0x25)));
+
+                deleteItem.setWidth(300);
+                deleteItem.setTitleSize(18);
+                deleteItem.setTitleColor(Color.BLACK);
+
+                menu.addMenuItem(deleteItem);
+
+                SwipeMenuItem openItem = new SwipeMenuItem(
+                        getApplicationContext());
+
+                openItem.setBackground(new ColorDrawable(Color.rgb(0xF9, 0x66,
+                        0xff)));
+
+                openItem.setWidth(300);
+
+                openItem.setTitle("Update");
+
+                openItem.setTitleSize(18);
+
+
+                openItem.setTitleColor(Color.WHITE);
+
+                menu.addMenuItem(openItem);
+
+
+            }
+        };
+
+
+        listView.setMenuCreator(creator);
+
+
+        listView.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
+                switch (index) {
+                    case 0:
+                        Intent intent = new Intent(PlacesList.this,MainActivity.class);
+                        intent.putExtra("id",listPlace.get(position).id);
+                        intent.putExtra("lat",listPlace.get(position).latitude);
+                        intent.putExtra("lng",listPlace.get(position).longitude);
+                        intent.putExtra("edit",true);
+                        startActivity(intent);
+
+                        break;
+                    case 1:
+
+                        //Toast.makeText(List0fFavtPlaces.this, "SEE:"+listPlace.get(position).id, Toast.LENGTH_SHORT).show();
+
+                        if(mDatabase.deletePlaces(listPlace.get(position).id)){
+
+                            listPlace.remove(position);
+                            loadPlaces();
+                            listView.setAdapter(placesAdaptor);
+
+                            Toast.makeText(PlacesList.this, "delete", Toast.LENGTH_SHORT).show();
+                            loadPlaces();
+
+
+                        }else {
+
+                            Toast.makeText(PlacesList.this, "not deleted", Toast.LENGTH_SHORT).show();
+
+
+                        }
+                        loadPlaces();
+
+
+                        break;
+                }
+
+                return false;
+            }
+        });
+
 
     }
+
 
 
 
@@ -40,9 +142,9 @@ public class PlacesList extends AppCompatActivity {
             do{
 
 
-                listPlace.add(new PlacesModel(cursor.getString(0),cursor.getString(1),
-                        cursor.getString(2),
-                        cursor.getDouble(3),cursor.getDouble(4)
+                listPlace.add(new PlacesModel(cursor.getInt(0),cursor.getString(1),cursor.getString(2),
+                        cursor.getString(3),
+                        cursor.getDouble(4),cursor.getDouble(5)
                 ));
 
             }while (cursor.moveToNext());

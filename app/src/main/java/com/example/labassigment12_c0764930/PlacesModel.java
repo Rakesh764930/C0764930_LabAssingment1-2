@@ -10,12 +10,13 @@ public class PlacesModel {
     Double latitude;
     Double longitude;
 
-    public PlacesModel( String name,String date,String address,Double longitude,Double latitude) {
+    public PlacesModel(int id, String name,String date,String address,Double longitude,Double latitude) {
         this.name = name;
         this.address = address;
         this.latitude = latitude;
         this.longitude = longitude;
         this.date = date;
+        this.id=id;
     }
 
     public int getId() {

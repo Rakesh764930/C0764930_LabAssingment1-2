@@ -239,6 +239,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                 objects[0] = mMap;
                 objects[1] = url;
+                Log.d("", "btnClick: " + url);
 
                 getNearbyPlaceData.execute(objects);
                 Toast.makeText(this, "Restaurants", Toast.LENGTH_SHORT).show();
@@ -264,7 +265,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 objects[2] = customMarker;
                 objects[3] = new LatLng(currentLocation.latitude,currentLocation.longitude);
                 GetDirections getDirectionsData = new GetDirections();
-                // execute asynchronously
+
                 getDirectionsData.execute(objects);
                 break;
 
@@ -304,7 +305,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         StringBuilder urlBuilder = new StringBuilder("https://maps.googleapis.com/maps/api/directions/json?");
         urlBuilder.append("origin="+currentLocation.latitude+","+currentLocation.longitude);
         urlBuilder.append("&destination="+customMarker.latitude+","+customMarker.longitude);
-        urlBuilder.append("&key=AIzaSyB45lwuNXNnXYsc3WHA1QyJKIkxqE-Rb7A");
+        urlBuilder.append("&key=AIzaSyBdKN4R296edvW6EnskkoeGUfW0uyNNea8");
         Log.d("", "getDirectionUrl: "+urlBuilder);
         return urlBuilder.toString();
     }
@@ -315,7 +316,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         placeUrl.append("location="+latitude+","+longitude);
         placeUrl.append("&radius="+RADIUS);
         placeUrl.append("&type="+nearbyPlace);
-        placeUrl.append("&key=AIzaSyB45lwuNXNnXYsc3WHA1QyJKIkxqE-Rb7A");
+        placeUrl.append("&key=AIzaSyBdKN4R296edvW6EnskkoeGUfW0uyNNea8");
         System.out.println(placeUrl.toString());
         return placeUrl.toString();
     }
